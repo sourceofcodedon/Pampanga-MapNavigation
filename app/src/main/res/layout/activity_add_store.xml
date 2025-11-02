@@ -52,10 +52,11 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/app_bar_layout">
+            app:layout_constraintTop_toBottomOf="@id/app_bar_layout">
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/text_input_layout_store_name"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:errorEnabled="false"
@@ -63,13 +64,13 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
-                <com.google.android.material.textfield.TextInputEditText
+                <AutoCompleteTextView
                     android:id="@+id/edittext_store_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:drawablePadding="@dimen/margin_padding_size_small"
                     android:hint="Store Name"
-                    android:inputType="text" />
+                    android:inputType="none" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -81,7 +82,7 @@
                 app:errorEnabled="false"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/text_input_layout_store_name">
+                app:layout_constraintTop_toBottomOf="@id/text_input_layout_store_name">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/edittext_opening_time"
@@ -103,7 +104,7 @@
                 app:errorEnabled="false"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/text_input_layout_opening_time">
+                app:layout_constraintTop_toBottomOf="@id/text_input_layout_opening_time">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/edittext_closing_time"
@@ -130,7 +131,7 @@
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/text_input_layout_closing_time" />
+                app:layout_constraintTop_toBottomOf="@id/text_input_layout_closing_time" />
 
             <ProgressBar
                 android:id="@+id/progress_bar"
@@ -138,10 +139,10 @@
                 android:layout_height="wrap_content"
                 android:indeterminateTint="@color/colorPrimary"
                 android:visibility="@{viewModel.isLoading ? View.VISIBLE : View.GONE}"
-                app:layout_constraintBottom_toBottomOf="@+id/button_create"
-                app:layout_constraintEnd_toEndOf="@+id/button_create"
-                app:layout_constraintStart_toStartOf="@+id/button_create"
-                app:layout_constraintTop_toTopOf="@+id/button_create" />
+                app:layout_constraintBottom_toTopOf="@id/button_create"
+                app:layout_constraintEnd_toEndOf="@id/button_create"
+                app:layout_constraintStart_toStartOf="@id/button_create"
+                app:layout_constraintTop_toTopOf="@id/button_create" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

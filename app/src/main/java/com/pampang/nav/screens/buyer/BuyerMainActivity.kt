@@ -16,8 +16,6 @@ import dagger.hilt.android.AndroidEntryPoint
 class BuyerMainActivity : AppCompatActivity() {
     private lateinit var mBinding: ActivityBuyerMainBinding
     private val authViewModel: AuthViewModel by viewModels()
-    private var isMenuOpen = false
-
 
     private lateinit var navController: NavController
 
@@ -28,17 +26,12 @@ class BuyerMainActivity : AppCompatActivity() {
 
     private fun initConfig() {
         initBinding()
-        initEventListener()
         initBottomNavigation()
     }
 
     private fun initBinding() {
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_buyer_main)
         mBinding.lifecycleOwner = this
-    }
-
-    private fun initEventListener() {
-
     }
 
     private fun initBottomNavigation() {

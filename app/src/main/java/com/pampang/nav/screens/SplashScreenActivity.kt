@@ -10,7 +10,7 @@ import androidx.core.animation.doOnEnd
 import androidx.databinding.DataBindingUtil
 import androidx.interpolator.view.animation.FastOutSlowInInterpolator
 import com.pampang.nav.databinding.ActivitySplashScreenBinding
-import com.pampang.nav.screens.buyer.BuyerMainActivity
+import com.pampang.nav.screens.buyer.BuyerMainActivity // <-- Add this line
 import com.pampang.nav.screens.seller.SellerMainActivity
 import com.pampang.nav.screens.auth.LoginActivity
 import com.pampang.nav.utilities.extension.launchActivity

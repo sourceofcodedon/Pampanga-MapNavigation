@@ -2,6 +2,7 @@ package com.pampang.nav.screens.seller
 
 import android.app.TimePickerDialog
 import android.os.Bundle
+import android.widget.ArrayAdapter
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -38,6 +39,7 @@ class AddStoreActivity : AppCompatActivity() {
         initEventListener()
         setupTimePickerListeners()
         initLiveData()
+        setupStoreDropdown()
     }
 
     private fun initBinding() {
@@ -136,5 +138,11 @@ class AddStoreActivity : AppCompatActivity() {
             }
             setCancelable(false)
         }.show()
+    }
+
+    private fun setupStoreDropdown() {
+        val stores = arrayOf("FirstFishStore", "SecondFishStore", "FirstGulayStore", "SecondGulayStore", "FirstMeatStore", "SecondMeatStore")
+        val adapter = ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, stores)
+        mBinding.edittextStoreName.setAdapter(adapter)
     }
 }

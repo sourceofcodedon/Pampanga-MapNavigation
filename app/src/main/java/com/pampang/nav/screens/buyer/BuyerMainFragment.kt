@@ -1,5 +1,7 @@
 package com.pampang.nav.screens.buyer
 
+import android.app.ActivityOptions
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,6 +9,9 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.pampang.nav.R
+import com.pampang.nav.MapNav.FirstFishLoc
+import com.pampang.nav.MapNav.Gulayloc
+import com.pampang.nav.MapNav.MeatMapLoc
 import com.pampang.nav.databinding.FragmentMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -15,7 +20,6 @@ class BuyerMainFragment : Fragment() {
 
     private lateinit var mBinding: FragmentMainBinding
     private var isMenuOpen = false
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -64,6 +68,36 @@ class BuyerMainFragment : Fragment() {
                 }
                 isMenuOpen = !isMenuOpen
             }
+
+            fabFish.setOnClickListener {
+                val intent = Intent(requireContext(), FirstFishLoc::class.java)
+                val options = ActivityOptions.makeCustomAnimation(
+                    requireContext(),
+                    R.anim.fade_in,
+                    R.anim.fade_out
+                )
+                startActivity(intent, options.toBundle())
+            }
+
+            fabVeggies.setOnClickListener {
+                val intent = Intent(requireContext(), Gulayloc::class.java)
+                 val options = ActivityOptions.makeCustomAnimation(
+                    requireContext(),
+                    R.anim.fade_in,
+                    R.anim.fade_out
+                )
+                startActivity(intent, options.toBundle())
+            }
+            fabMeat.setOnClickListener {
+                val intent = Intent(requireContext(), MeatMapLoc::class.java)
+                val options = ActivityOptions.makeCustomAnimation(
+                    requireContext(),
+                    R.anim.fade_in,
+                    R.anim.fade_out
+                )
+                startActivity(intent, options.toBundle())
+            }
+
         }
     }
 

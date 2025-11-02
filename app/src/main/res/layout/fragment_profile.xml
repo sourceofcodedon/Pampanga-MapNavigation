@@ -12,7 +12,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@android:color/white">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraint_layout_top"
@@ -67,15 +68,16 @@
         <Button
             android:id="@+id/button_logout"
             style="@style/Widget.MaterialComponents.Button"
-            android:layout_width="0dp"
-            android:visibility="invisible"
-            android:layout_height="wrap_content"
+            android:layout_width="370dp"
+            android:layout_height="53dp"
             android:layout_marginHorizontal="@dimen/margin_padding_size_xxxlarge"
+            android:layout_marginBottom="@dimen/margin_padding_size_medium"
+            android:background="@color/white"
             android:text="Logout"
+            android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginBottom="@dimen/margin_padding_size_medium" />
+            app:layout_constraintStart_toStartOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>
