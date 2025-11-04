@@ -5,7 +5,9 @@
     tools:context=".screens.dashboard.HomeFragment">
 
     <data>
-
+        <variable
+            name="username"
+            type="String" />
         <import type="android.view.View" />
 
     </data>
@@ -45,7 +47,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:padding="@dimen/margin_padding_side_size_default"
-            android:text="Profile"
+            android:text="@{username}"
             android:textAlignment="center"
             android:textSize="@dimen/text_size_large"
             android:textStyle="bold"

@@ -94,12 +94,17 @@ class BuyerProfileFragment : Fragment() {
     }
 
     private fun initRequest() {
-
+        authViewModel.loadUserData()
     }
 
     private fun initLiveData() {
         mainViewModel.profileMenuItems.observe(viewLifecycleOwner) {
             mAdapter.submitList(it)
+        }
+        authViewModel.currentUser.observe(viewLifecycleOwner) { firebaseUser ->
+            firebaseUser?.let {
+                mBinding.username = it.displayName
+            }
         }
     }
 
