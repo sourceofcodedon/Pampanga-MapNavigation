@@ -26,7 +26,6 @@ class SellerMainActivity : AppCompatActivity() {
 
     private fun initConfig() {
         initBinding()
-        initEventListener()
         initBottomNavigation()
     }
 
@@ -35,30 +34,11 @@ class SellerMainActivity : AppCompatActivity() {
         mBinding.lifecycleOwner = this
     }
 
-    private fun initEventListener() {
-        mBinding.apply {
-        }
-    }
-
     private fun initBottomNavigation() {
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.frame_layout) as NavHostFragment
         navController = navHostFragment.navController
 
         mBinding.bottomNavigation.setupWithNavController(navController)
-
-        mBinding.bottomNavigation.setOnItemSelectedListener { menuItem ->
-            when (menuItem.itemId) {
-                R.id.list -> {
-                    navController.navigate(R.id.listFragment)
-                }
-
-                R.id.profile -> {
-                    navController.navigate(R.id.profileFragment)
-                }
-            }
-
-            return@setOnItemSelectedListener true
-        }
     }
 }

@@ -40,19 +40,5 @@ class BuyerMainActivity : AppCompatActivity() {
         navController = navHostFragment.navController
 
         mBinding.bottomNavigation.setupWithNavController(navController)
-
-        mBinding.bottomNavigation.setOnItemSelectedListener { menuItem ->
-            when (menuItem.itemId) {
-                R.id.main -> {
-                    navController.navigate(R.id.mainFragment)
-                }
-
-                R.id.profile -> {
-                    navController.navigate(R.id.profileFragment)
-                }
-            }
-
-            return@setOnItemSelectedListener true
-        }
     }
 }

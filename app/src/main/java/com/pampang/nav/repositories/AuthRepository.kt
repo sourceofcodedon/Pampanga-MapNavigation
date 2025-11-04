@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.auth.userProfileChangeRequest
 import com.google.firebase.firestore.FirebaseFirestore
 import com.pampang.nav.constants.SharedPrefsConst
 import com.pampang.nav.utilities.SharedPrefs
@@ -32,7 +33,14 @@ class AuthRepository @Inject constructor(
             _isLoading.postValue(true)
 
             val authResult = firebaseAuth.createUserWithEmailAndPassword(email, password).await()
-            val uid = authResult.user?.uid ?: throw Exception("No UID found")
+            val user = authResult.user ?: throw Exception("User creation failed")
+            val uid = user.uid
+
+            // Update the user's profile with the username
+            val profileUpdates = userProfileChangeRequest {
+                displayName = username
+            }
+            user.updateProfile(profileUpdates).await()
 
             val userData = mapOf(
                 "uid" to uid,
