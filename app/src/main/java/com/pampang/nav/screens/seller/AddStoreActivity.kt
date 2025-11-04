@@ -54,14 +54,15 @@ class AddStoreActivity : AppCompatActivity() {
 
             buttonCreate.setSafeOnClickListener {
                 val storeName = mBinding.edittextStoreName.text.toString().trim()
+                val storeCategory = mBinding.edittextStoreCategory.text.toString().trim()
                 val openingTime = mBinding.edittextOpeningTime.text.toString().trim()
                 val closingTime = mBinding.edittextClosingTime.text.toString().trim()
 
-                if (storeName.isEmpty() || openingTime.isEmpty() || closingTime.isEmpty()) {
+                if (storeName.isEmpty() || storeCategory.isEmpty() || openingTime.isEmpty() || closingTime.isEmpty()) {
                     showToast("Please Fill all Fields")
                     return@setSafeOnClickListener
                 } else {
-                    mainViewModel.addStore(storeName, openingTime, closingTime)
+                    mainViewModel.addStore(storeName, storeCategory, openingTime, closingTime)
                 }
 
             }
@@ -143,6 +144,6 @@ class AddStoreActivity : AppCompatActivity() {
     private fun setupStoreDropdown() {
         val stores = arrayOf("FirstFishStore", "SecondFishStore", "FirstGulayStore", "SecondGulayStore", "FirstMeatStore", "SecondMeatStore")
         val adapter = ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, stores)
-        mBinding.edittextStoreName.setAdapter(adapter)
+        mBinding.edittextStoreCategory.setAdapter(adapter)
     }
 }

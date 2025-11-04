@@ -25,22 +25,19 @@ public class FirstMeatStore extends AppCompatActivity {
         openTimeTextView = findViewById(R.id.open_time_value);
         closeTimeTextView = findViewById(R.id.close_time_value);
 
-        String storeName = getIntent().getStringExtra("storeName");
-
-        if (storeName != null) {
-            storeNameTextView.setText(storeName);
-            FirebaseFirestore db = FirebaseFirestore.getInstance();
-            db.collection("stores")
-                    .whereEqualTo("store_name", storeName)
-                    .get()
-                    .addOnCompleteListener(task -> {
-                        if (task.isSuccessful() && !task.getResult().isEmpty()) {
-                            String openingTime = task.getResult().getDocuments().get(0).getString("opening_time");
-                            String closingTime = task.getResult().getDocuments().get(0).getString("closing_time");
-                            openTimeTextView.setText(openingTime);
-                            closeTimeTextView.setText(closingTime);
-                        }
-                    });
-        }
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("stores")
+                .whereEqualTo("store_category", "FirstMeatStore")
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful() && !task.getResult().isEmpty()) {
+                        String storeName = task.getResult().getDocuments().get(0).getString("store_name");
+                        String openingTime = task.getResult().getDocuments().get(0).getString("opening_time");
+                        String closingTime = task.getResult().getDocuments().get(0).getString("closing_time");
+                        storeNameTextView.setText(storeName);
+                        openTimeTextView.setText(openingTime);
+                        closeTimeTextView.setText(closingTime);
+                    }
+                });
     }
 }

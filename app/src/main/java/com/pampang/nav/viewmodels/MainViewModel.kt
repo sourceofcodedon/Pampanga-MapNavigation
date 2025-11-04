@@ -34,9 +34,9 @@ class MainViewModel @Inject constructor(
         }
     }
 
-    fun addStore(storeName: String, openingTime: String, closingTime: String) {
+    fun addStore(storeName: String, storeCategory: String, openingTime: String, closingTime: String) {
         viewModelScope.launch {
-            val result = mainRepository.addStore(storeName, openingTime, closingTime)
+            val result = mainRepository.addStore(storeName, storeCategory, openingTime, closingTime)
             _addStoreResult.postValue(result)
         }
     }

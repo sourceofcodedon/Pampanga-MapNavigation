@@ -58,7 +58,7 @@ class MainRepository @Inject constructor(
         }
     }
 
-    suspend fun addStore(storeName: String, openingTime: String, closingTime: String): Result<Unit> {
+    suspend fun addStore(storeName: String, storeCategory: String, openingTime: String, closingTime: String): Result<Unit> {
         return try {
             _isLoading.postValue(true)
 
@@ -69,6 +69,7 @@ class MainRepository @Inject constructor(
 
             val storeData = hashMapOf(
                 "store_name" to storeName,
+                "store_category" to storeCategory,
                 "opening_time" to openingTime,
                 "closing_time" to closingTime,
                 "owner_id" to currentUser.uid
