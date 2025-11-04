@@ -33,6 +33,10 @@ class GroupChatFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.recyclerViewChat.adapter = groupChatAdapter
 
+        binding.toolbar.setNavigationOnClickListener {
+            activity?.finish()
+        }
+
         lifecycleScope.launch {
             viewModel.messages.collect {
                 groupChatAdapter.submitList(it)
