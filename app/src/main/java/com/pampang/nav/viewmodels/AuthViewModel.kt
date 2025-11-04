@@ -29,6 +29,9 @@ class AuthViewModel @Inject constructor(
     private val _loggedInRole = MutableLiveData<String>()
     val loggedInRole: LiveData<String> = _loggedInRole
 
+    private val _changePasswordResult = MutableLiveData<Result<Unit>?>()
+    val changePasswordResult: LiveData<Result<Unit>?> get() = _changePasswordResult
+
     fun login(email: String, password: String, role: String) {
         viewModelScope.launch {
             val result = authRepository.login(email, password, role)
@@ -58,5 +61,19 @@ class AuthViewModel @Inject constructor(
 
     fun clearRegisterResult() {
         _registerResult.value = null
+    }
+
+    fun updateUsername(newUsername: String) {
+        viewModelScope.launch {
+            authRepository.updateUsername(newUsername)
+            loadUserData() // Refresh user data after update
+        }
+    }
+
+    fun changePassword(currentPassword: String, newPassword: String) {
+        viewModelScope.launch {
+            val result = authRepository.changePassword(currentPassword, newPassword)
+            _changePasswordResult.value = result
+        }
     }
 }

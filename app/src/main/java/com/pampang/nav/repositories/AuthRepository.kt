@@ -2,6 +2,7 @@ package com.pampang.nav.repositories
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.google.firebase.auth.EmailAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.userProfileChangeRequest
@@ -91,5 +92,50 @@ class AuthRepository @Inject constructor(
     suspend fun logout() {
         firebaseAuth.signOut()
         sharedPrefs.clearAll()
+    }
+
+    suspend fun updateUsername(newUsername: String): Result<Unit> {
+        return try {
+            _isLoading.postValue(true)
+            val user = getCurrentUser() ?: throw Exception("User not logged in")
+            val profileUpdates = userProfileChangeRequest {
+                displayName = newUsername
+            }
+            user.updateProfile(profileUpdates).await()
+            firestore.collection("users").document(user.uid).update("username", newUsername).await()
+            updateUsernameInChatRooms(user.uid, newUsername)
+            Result.success(Unit)
+        } catch (e: Exception) {
+            Result.failure(e)
+        } finally {
+            _isLoading.postValue(false)
+        }
+    }
+
+    private suspend fun updateUsernameInChatRooms(userId: String, newUsername: String) {
+        val chatRoomsRef = firestore.collection("chat_rooms")
+        val query = chatRoomsRef.whereArrayContains("participants", userId)
+        val snapshot = query.get().await()
+        for (document in snapshot.documents) {
+            val updates = mapOf(
+                "participantInfo.$userId.name" to newUsername
+            )
+            document.reference.update(updates).await()
+        }
+    }
+
+    suspend fun changePassword(currentPassword: String, newPassword: String): Result<Unit> {
+        return try {
+            _isLoading.postValue(true)
+            val user = getCurrentUser() ?: throw Exception("User not logged in")
+            val credential = EmailAuthProvider.getCredential(user.email!!, currentPassword)
+            user.reauthenticate(credential).await()
+            user.updatePassword(newPassword).await()
+            Result.success(Unit)
+        } catch (e: Exception) {
+            Result.failure(e)
+        } finally {
+            _isLoading.postValue(false)
+        }
     }
 }

@@ -8,7 +8,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/colorPrimary">
 
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
@@ -56,13 +57,13 @@
 
             <ImageButton
                 android:id="@+id/button_send"
-                android:layout_width="48dp"
+                android.layout_width="48dp"
                 android:layout_height="48dp"
                 android:background="@drawable/chat_bubble_sent"
                 android:src="@android:drawable/ic_menu_send"
                 app:tint="@android:color/white"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app.layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
